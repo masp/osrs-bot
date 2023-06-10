@@ -1,0 +1,15 @@
+# Pull base image.
+FROM jlesage/baseimage-gui:ubuntu-20.04
+
+# Install xterm.
+RUN apt-get update && \
+    apt-get install -y openjdk-11-jdk
+COPY RuneLite.jar /RuneLite.jar
+
+# Copy all files under vars/ to /etc/cont-env.d/.
+COPY vars/* /etc/cont-env.d/
+
+RUN mkdir -p /var/osrs
+
+# Copy the start script.
+COPY startapp.sh /startapp.sh
